@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Freddy McGarry</title>
+<meta name="description" content="Freddy McGarry — software engineer working in .NET and Azure, based near Pittsburgh, PA.">
+<meta name="theme-color" content="#DEDBD4">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fmcgarry.dev/">
+<meta property="og:title" content="Freddy McGarry">
+<meta property="og:description" content="Software engineer working in .NET and Azure, based near Pittsburgh, PA.">
+<meta property="og:image" content="https://fmcgarry.dev/img/profile.png">
+
+<link rel="icon" href="img/profile.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --mortar: #DEDBD4;
+    --stone:  #F2F0EC;
+    --slate:  #15181B;
+    --iron:   #5C6570;
+    --oxide:  #8B3A3A;
+    --joint:  rgba(21, 24, 27, 0.10);
+
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+    --body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --mortar: #131619;
+      --stone:  #1B1F23;
+      --slate:  #EDEBE6;
+      --iron:   #939BA5;
+      --oxide:  #C46A6A;
+      --joint:  rgba(237, 235, 230, 0.10);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--mortar);
+    color: var(--slate);
+    font-family: var(--body);
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8vh 6vw;
+  }
+
+  /* The wall: a running-bond course pattern, drawn as ambient texture */
+  .wall {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    color: var(--joint);
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 34rem;
+  }
+
+  .portrait {
+    display: block;
+    width: 108px;
+    height: 108px;
+    object-fit: cover;
+    border: 7px solid var(--stone);
+    border-radius: 2px;
+    box-shadow: 0 1px 0 1px var(--joint);
+    margin-bottom: 2.25rem;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--iron);
+    margin: 0 0 1rem;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 2rem;
+    height: 2px;
+    background: var(--oxide);
+    flex: none;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.75rem, 13vw, 5rem);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    margin: 0 0 1.5rem;
+  }
+
+  h1 span { display: block; }
+
+  .bio {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    max-width: 28rem;
+    color: var(--iron);
+    margin: 0 0 2.5rem;
+  }
+
+  .bio strong { color: var(--slate); font-weight: 600; }
+
+  /* Links, laid like a course of brick */
+  .course {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+  }
+
+  .brick {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    background: var(--stone);
+    border: 1px solid var(--joint);
+    border-radius: 2px;
+    color: var(--slate);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: transform 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+  }
+
+  .brick .arrow { color: var(--iron); transition: transform 160ms ease, color 160ms ease; }
+
+  .brick:hover,
+  .brick:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--oxide);
+    color: var(--oxide);
+    box-shadow: 0 3px 0 -1px var(--joint);
+  }
+
+  .brick:hover .arrow,
+  .brick:focus-visible .arrow {
+    color: var(--oxide);
+    transform: translateX(3px);
+  }
+
+  .brick:focus-visible { outline: 2px solid var(--oxide); outline-offset: 3px; }
+
+  footer {
+    margin-top: 3.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--joint);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--iron);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+    .brick:hover, .brick:focus-visible { transform: none; }
+    .brick:hover .arrow, .brick:focus-visible .arrow { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<canvas class="wall" aria-hidden="true"></canvas>
+
+<main>
+  <img class="portrait" src="img/profile.png" alt="Freddy McGarry" width="108" height="108">
+
+  <p class="eyebrow">Pittsburgh, Pennsylvania</p>
+
+  <h1><span>Freddy</span><span>McGarry</span></h1>
+
+  <p class="bio">
+    Software engineer working in <strong>.NET</strong> and <strong>Azure</strong>.
+  </p>
+
+  <nav class="course">
+    <a class="brick" href="https://github.com/fmcgarry" rel="me noopener">GitHub <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    <a class="brick" href="https://www.linkedin.com/in/fmcgarry" rel="me noopener">LinkedIn <span class="arrow" aria-hidden="true">&rarr;</span></a>
+  </nav>
+
+  <footer>fmcgarry.dev</footer>
+</main>
+
+<script>
+(function () {
+  var canvas = document.querySelector('.wall');
+  var ctx = canvas.getContext('2d');
+
+  var BW = 92;    // brick width
+  var BH = 30;    // brick height
+  var GAP = 3;    // mortar joint
+  var R = 250;    // radius of cursor influence
+  var PUSH = 8;   // how far a brick shifts at full influence
+
+  var w = 0, h = 0, bricks = [];
+  var joint = '', oxide = '';
+  var px = 0, py = 0, tx = 0, ty = 0;
+  var lastMove = -Infinity;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var coarse = window.matchMedia('(pointer: coarse)');
+  var dark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function readColors() {
+    var s = getComputedStyle(document.documentElement);
+    joint = s.getPropertyValue('--joint').trim();
+    oxide = s.getPropertyValue('--oxide').trim();
+  }
+
+  function layout() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    bricks = [];
+    var rows = Math.ceil(h / BH) + 1;
+    for (var r = 0; r < rows; r++) {
+      var offset = (r % 2) ? -BW / 2 : 0;
+      var cols = Math.ceil(w / BW) + 2;
+      for (var c = 0; c < cols; c++) {
+        bricks.push({ x: c * BW + offset, y: r * BH });
+      }
+    }
+
+    if (px === 0 && py === 0) { px = tx = w / 2; py = ty = h * 0.45; }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    ctx.lineWidth = 1;
+
+    var hot = [];
+    ctx.beginPath();
+
+    for (var i = 0; i < bricks.length; i++) {
+      var b = bricks[i];
+      var dx = b.x + BW / 2 - px;
+      var dy = b.y + BH / 2 - py;
+      var d2 = dx * dx + dy * dy;
+
+      var x = b.x + GAP / 2, y = b.y + GAP / 2;
+      var bw = BW - GAP, bh = BH - GAP;
+
+      if (d2 < R * R) {
+        var d = Math.sqrt(d2) || 1;
+        var f = 1 - d / R;
+        f = f * f;                        // ease the falloff
+        var inset = f * 3;                // joints widen near the cursor
+        x += (dx / d) * PUSH * f + inset;
+        y += (dy / d) * PUSH * f + inset;
+        bw -= inset * 2;
+        bh -= inset * 2;
+        hot.push([x, y, bw, bh, f]);
+      }
+
+      ctx.rect(x, y, bw, bh);
+    }
+
+    ctx.strokeStyle = joint;
+    ctx.stroke();
+
+    ctx.strokeStyle = oxide;
+    for (var j = 0; j < hot.length; j++) {
+      var g = hot[j];
+      ctx.globalAlpha = g[4] * 0.75;
+      ctx.beginPath();
+      ctx.rect(g[0], g[1], g[2], g[3]);
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function frame(now) {
+    // With no cursor for a few seconds, the focus drifts on its own
+    if (now - lastMove > 2600) {
+      var t = now / 1000;
+      tx = w / 2 + Math.cos(t * 0.21) * w * 0.34;
+      ty = h / 2 + Math.sin(t * 0.29) * h * 0.30;
+    }
+    px += (tx - px) * 0.075;
+    py += (ty - py) * 0.075;
+    draw();
+    requestAnimationFrame(frame);
+  }
+
+  function onMove(e) {
+    tx = e.clientX;
+    ty = e.clientY;
+    lastMove = performance.now();
+  }
+
+  readColors();
+  layout();
+
+  if (dark.addEventListener) dark.addEventListener('change', function () { readColors(); });
+  window.addEventListener('resize', layout);
+
+  if (reduced.matches) {
+    px = -9999; py = -9999;   // park the highlight, draw the wall flat
+    draw();
+  } else {
+    if (!coarse.matches) {
+      window.addEventListener('mousemove', onMove, { passive: true });
+    }
+    requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>
